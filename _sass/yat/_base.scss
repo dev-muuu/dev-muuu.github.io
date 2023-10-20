@@ -184,10 +184,10 @@ pre {
  * Wrapper
  */
 .wrapper {
-  max-width: $content-width;
+  min-width: $content-width;
   margin: auto;
-  padding-right: $spacing-unit;
-  padding-left: $spacing-unit;
+  padding-right: $spacing-unit * 5;// +100;
+  padding-left: $spacing-unit * 6 ; //+200;
   @extend %clearfix;
 }
 
