@@ -2,7 +2,7 @@
 layout: post
 title: Receiving and Handling Events with Combine
 categories: Combine
-tags: [iOS,Combine]
+tags: [iOS, Combine, Document]
 ---
 
 ## [Apple Documentation](https://developer.apple.com/documentation/combine/receiving-and-handling-events-with-combine)

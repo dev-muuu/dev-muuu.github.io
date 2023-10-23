@@ -2,7 +2,7 @@
 layout: post
 title: Combine
 categories: Combine
-tags: [iOS, Combine]
+tags: [iOS, Combine, Document]
 ---
 
 ## [Apple Documentation](https://developer.apple.com/documentation/combine)
