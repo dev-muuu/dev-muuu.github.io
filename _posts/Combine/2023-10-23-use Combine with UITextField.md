@@ -26,7 +26,6 @@ NotificationCenter.default
        print($0)
     })
     .store(in: &cancellable)
-}
 ```
 
 ## 2. convenience 1
@@ -101,6 +100,9 @@ extension AnyPublisher where Self == AnyPublisher<UITextField, Never>{
     }
 }
 ```
+
+위와 같이 extension을 통해 목적에 맞는 데이터를 방출하는 publisher들을 추가해나가면 된다. 
+
 아래와 같이 사용할 수 있다. 
 
 ``` swift 
