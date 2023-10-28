@@ -7,13 +7,13 @@ tags: [iOS, Combine]
 
 ## Overview
 
-UITextField를 Combine으로 사용하기 위해서는 NotificationCenter을 활용해야 한다. `extension`을 활용하면 UITextField에 대한 event를 조금 더 편리하게 받을 수 있다. 
+UITextField를 Combine으로 사용하기 위해서는 `NotificationCenter`을 활용해야 한다. `extension`을 활용하면 UITextField에 대한 이벤트를 조금 더 편리하게 받을 수 있다. 
 
 
 ## 1. default
 ---
 
-가장 기본적인 방식이다. NotificationCenter 인스턴스에 직접 접근하며 어떤 event를 처리받을 것인지 지정해주면 된다. NotificationCenter에서 데이터를 얻기 위해서는 타입 캐스팅 작업을 거쳐야 한다.
+가장 기본적인 방식이다. `NotificationCenter` 인스턴스에 직접 접근하며 어떤 이벤트를 처리받을 것인지 지정해주면 된다. NotificationCenter에서 데이터를 얻기 위해서는 타입 캐스팅 작업을 거쳐야 한다.
 
 ``` swift
 NotificationCenter.default
@@ -31,7 +31,7 @@ NotificationCenter.default
 ## 2. convenience 1
 ---
 
-섹션 1 방식의 경우 UITextField로 부터 event를 받으려면 매번 NotificationCenter에 접근하고 타입 캐스팅 작업을 거쳐야 한다는 번거로움이 있다. UITextField를 `extension`하여 연산 프로퍼티를 추가하면 문제점을 개선할 수 있다. 
+섹션 1 방식의 경우 `UITextField`로 부터 이벤트를 받으려면 매번 `NotificationCenter`에 접근하고 타입 캐스팅 작업을 거쳐야 한다는 번거로움이 있다. `UITextField`를 `extension`하여 연산 프로퍼티를 추가하면 문제점을 개선할 수 있다. 
 
 ``` swift
 extension UITextField {
@@ -63,7 +63,7 @@ textfield.publisher
 
 섹션 2 방식은 `UITextField.textDidChangeNotification` 이벤트에 대해서만 다룰 수 있으며, 반드시 text에 대해서만 element를 방출한다는 문제점이 있다. 
 
-RxSwift는 textfield에 대해서 아래와 같이 text 값에 대해서 접근한다.
+RxSwift는 textfield에 대해서 아래와 같이 `text` 프로퍼티에 대해서 접근한다.
 
 ```
 textfield.rx.text

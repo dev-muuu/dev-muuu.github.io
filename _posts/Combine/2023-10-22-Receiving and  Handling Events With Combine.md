@@ -13,7 +13,7 @@ Combine 프레임워크는 앱이 이벤트를 처리하는 방법에 대한 선
 
 ## Connect a Publisher to a Subscriber
 ---
-Combine으로 부터 text field의 notification을 받기 위해서는 NotificationCenter의 default 인스턴스와 `publisher(for: object:)`를 호출해야 한다. subscriber는 assoicated type인 Input, Output, Failure를 정의해야 한다. Failure는 publisher가 생산하고 subscriber가 받게 되는 error의 종류를 나타낸다. Combine은 publisher에 output과 failure 타입들을 자동으로 매치시켜주는 2가지의 built-in subscriber를 제공한다. 
+Combine으로 부터 text field의 notification을 받기 위해서는 NotificationCenter의 default 인스턴스와 `publisher(for: object:)`를 호출해야 한다. subscriber는 assoicated type인 Input, Output, Failure를 정의해야 한다. Failure는 publisher가 생산하고 subscriber가 받게 되는 에러의 종류를 나타낸다. Combine은 publisher에 output과 failure 타입들을 자동으로 매치시켜주는 2가지의 built-in subscriber를 제공한다. 
 
 1. `sink(receiveCompletion:receiveValue:)`는 2가지의 closure를 가진다. 정상적으로 publisher가 종료되거나 error로 인해 실패했을 때 Subscribers.Completion이 방출되며 receiveCompletion가 동작하게 된다.
 2. `assign(to: on:)`는 모든 element를 지정된 object의 속성에 즉시 할당한다. 
@@ -31,7 +31,7 @@ Combine으로 부터 text field의 notification을 받기 위해서는 Notificat
 
 ## Change the Output Type with Operators
 ---
-위의 섹션에서는 `sink(receiveValue:)`의 receiveValue closure에서 기본적으로 element에 대한 모든 작업을 수행했다. 만약 element에 대해서 많은 커스텀 작업 등을 모두 closure에서 수행하게 될 경우 부담이 될 수 있다. Combine은 operator 결합을 통해 event를 커스텀하며 전달할 수 있도록 한다. 
+위의 섹션에서는 `sink(receiveValue:)`의 receiveValue closure에서 기본적으로 element에 대한 모든 작업을 수행했다. 만약 element에 대해서 많은 커스텀 작업 등을 모두 closure에서 수행하게 될 경우 부담이 될 수 있다. Combine은 `operator` 결합을 통해 이벤트를 커스텀하며 전달할 수 있도록 한다. 
 
 + `map(_:)`
 + `flatMap(maxPublishers:_:)`
