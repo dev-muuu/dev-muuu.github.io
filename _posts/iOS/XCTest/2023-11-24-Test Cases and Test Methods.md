@@ -43,8 +43,8 @@ class TableValidationTests: XCTestCase {
 ## XCTestCase
 ---
 
-
-
+### [Set Up and Tear Down State in Your Tests]({{ iOS/XCTest/2023-11-25-Set Up and Tear Down State in Your Tests.md | relative_url }})
 
 ## XCTest
 ---
+
