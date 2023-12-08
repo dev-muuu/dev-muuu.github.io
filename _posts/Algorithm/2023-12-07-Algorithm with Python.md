@@ -26,6 +26,26 @@ tags: [Algorithm, Programmers]
 ## 배열
 ---
 
+- 원소 추가
+
+``` python
+배열.append(원소)
+```
+
+- 마지막 원소 삭제
+
+``` python
+배열.pop()
+```
+
+- 정렬
+
+``` python
+배열.sort() # 오름차순
+배열.sort(reversed=True) # 내림차순
+```
+
+
 - map으로 배열 값 변환하기
 
 ``` python
