@@ -1,0 +1,2799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Home | 쑤야의 개발 블로그</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Home">
+<meta name="author" content="dev-muuu">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="http://dev-muuu.github.io/jekyll-theme-yat/">
+<meta property="og:url" content="http://dev-muuu.github.io/jekyll-theme-yat/">
+<meta property="og:site_name" content="쑤야의 개발 블로그">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Home">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"dev-muuu"},"headline":"Home","name":"쑤야의 개발 블로그","url":"http://dev-muuu.github.io/jekyll-theme-yat/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://dev-muuu.github.io">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://dev-muuu.github.io/jekyll-theme-yat/feed.xml" title="쑤야의 개발 블로그">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header site-header-transparent" role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="쑤야의 개발 블로그" src="" onerror="this.style.display='none'">
+  쑤야의 개발 블로그
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      // documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
+    <div class="page-banner-img">
+<div style="background-image: url(/jekyll-theme-yat/assets/images/banners/home.jpeg)"></div>
+        <img class="img-placeholder" src="/jekyll-theme-yat/assets/images/banners/home.jpeg">
+</div>
+    <div class="wrapper">
+      <div class="page-banner-inner"><div class="page-banner-default">
+            <h1 class="page-banner-heading">
+              Home
+            </h1>
+            <h2 class="page-banner-subheading">
+              
+            </h2>
+          </div></div>
+    </div>
+  </section><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="articles">
+  
+
+  
+
+
+  
+
+
+
+
+<div class="pagination">
+  <!-- Post list links -->
+  <ul class="post-list z-image-style">
+    <!-- Top list item --><!-- Normal list item -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/12/08/%EB%91%90-%ED%81%90-%ED%95%A9-%EA%B0%99%EA%B2%8C-%EB%A7%8C%EB%93%A4%EA%B8%B0.html">
+      두 큐 합 같게 만들기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/12/08/%EB%91%90-%ED%81%90-%ED%95%A9-%EA%B0%99%EA%B2%8C-%EB%A7%8C%EB%93%A4%EA%B8%B0.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/12/08/%EB%91%90-%ED%81%90-%ED%95%A9-%EA%B0%99%EA%B2%8C-%EB%A7%8C%EB%93%A4%EA%B8%B0.html">
+      <p>문제
+
+Approach
+
+
+
+  이분 탐색을 풀 때와 같이 접근하였다.
+
+
+Logic
+
+
+
+  하나의 큐에 대해서만 생각한다.
+  기준 값보다 합이 클 경우, dequeue 시킨다.
+  기준 값보다 합이 작을 경우, 반대 큐에서 원소를 가져와 enqueue 시킨다.
+
+
+주의할 점
+
+
+
+  처음 코드를 작성할 때는 queue를 사용했다. 이 경우 매번 dequeue 시킬 때마다 O(N)의 시간 복잡도를 가지게 되다 보니 시간 초과 문제가 발생하였다.
+  이를 해결하기 위해 포인터를 사용하였다. dequeue는 현재 가리키는 포인터를 증가시키는 것으로 대신 처리한다.
+
+
+Code
+
+
+func solution(_ que... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/12/07/%EC%BA%90%EC%8B%9C.html">
+      캐시<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/12/07/%EC%BA%90%EC%8B%9C.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/12/07/%EC%BA%90%EC%8B%9C.html">
+      <p>문제
+
+Approach
+
+
+Logic
+
+
+
+  딕셔너리 자료구조를 사용.
+  key는 도시 이름, value는 캐시에 들어간 시간.
+  LRU 알고리즘에 맞게 딕셔너리 데이터를 변경해준다.
+
+
+Code
+
+
+func solution(_ cacheSize:Int, _ cities:[String]) -&gt; Int {
+    
+    var ans = 0
+    var cache = [String: Int]()
+    
+    if cacheSize == 0 {
+        return cities.count * 5
+    }
+    
+    for (i, c) in cities.enumerated() {
+     ... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/12/07/Algorithm-with-Python.html">
+      Algorithm with Python<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/12/07/Algorithm-with-Python.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/12/07/Algorithm-with-Python.html">
+      <p>파이썬으로 알고리즘을 풀기 위해 필요한 개념들을 정리합니다.
+
+문자열
+
+
+
+  문자열의 대/소문자화.
+
+
+.upper() # 대문자
+.lower() # 소문자
+
+
+
+  특정 문자를 기준으로 문자열 분리
+
+
+.split(문자)
+
+
+배열
+
+
+
+  원소 추가
+
+
+배열.append(원소)
+
+
+
+  마지막 원소 삭제
+
+
+배열.pop()
+
+
+
+  정렬
+
+
+배열.sort() # 오름차순
+배열.sort(reversed=True) # 내림차순
+
+
+
+  map으로 배열 값 변환하기
+
+
+list(map(int, 배열)) # str을 int로 변환
+ex. list(map(int, s))
+
+
+딕셔너리
+
+
+
+  빈 딕셔너리 선언.
+
+
+ca... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/xctest/2023/11/25/Set-Up-and-Tear-Down-State-in-Your-Tests.html">
+      Set Up and Tear Down State in Your Tests<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 25, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/xctest/2023/11/25/Set-Up-and-Tear-Down-State-in-Your-Tests.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/xctest/2023/11/25/Set-Up-and-Tear-Down-State-in-Your-Tests.html">
+      <p>Apple Documentation
+
+테스트를 실행하기 전 초기 상태를 준비하고, 테스트가 완료된 이후 자원을 청소합니다.
+
+Overview
+
+
+코드에서 올바른 결과가 나오는지 일관적이고 확실하게 확인하려면 테스트는 예측 가능한 알려진 상태에서 시작해야 합니다. 테스트 클래스의 모든 테스트 방법에 대해 한 번씩 상태를 설정해야 하는 경우도 있고, 각 테스트 방법 전에 알려진 상태로 리셋해야 하는 경우도 있습니다.
+
+각 테스트 방법이나 테스트 클래스가 완료된 후에는 임시 파일이나 스크린샷과 같이 필요없는 파일을 삭제할 수도 있습니다. 또는 고장 진단에 도움이 되도록 테스트 후 최종 상태를 캡처할 수도 있습니다.
+
+테... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#XCTest">#XCTest</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/xctest/2023/11/24/Test-Cases-and-Test-Methods.html">
+      Test Cases and Test Methods<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 24, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/xctest/2023/11/24/Test-Cases-and-Test-Methods.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/xctest/2023/11/24/Test-Cases-and-Test-Methods.html">
+      <p>Apple Documentation
+
+테스트 함수는 코드의 특정 부분을 테스트할 수 있는 작은 자체적인 함수입니다. 테스트 케이스는 연관된 테스트 함수들의 그룹입니다.
+
+Defining Test Cases and Test Methods
+
+
+Overview
+
+
+XCTestCase의 하위 클래스에 하나 이상의 테스트 함수들을 작성하여 관련 테스트들을 그룹화할 수 있습니다.
+
+프로젝트에 테스트를 추가하는 방법:
+
+  테스트 타켓에 대한 테스트 케이스인 XCTestCase의 하위 클래스를 생성합니다.
+  테스트 케이스에 대해 하나 이상의 테스트 함수를 추가합니다.
+  각각의 테스트 함수에 대해 하나 이상의 테스트 asse... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#XCTest">#XCTest</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/xctest/2023/11/22/XCTest.html">
+      XCTest<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 22, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/xctest/2023/11/22/XCTest.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/xctest/2023/11/22/XCTest.html">
+      <p>Apple Documentation
+
+Overview
+
+
+XCTest 프레임워크를 사용하여 Xcode의 프로젝트의 단위 테스트를 작성합니다. 테스트는 코드 실행 중 특정 조건이 충족되었다고 주장하며, 조건이 충족되지 않을 경우에는 실패를 기록합니다.
+
+테스트는 또한 코드 블록의 성능을 측정하여 성능 회귀를 확인할 수 있으며, 애플리케이션의 UI와 상호작용하여 사용자 상호작용 흐름을 검증할 수 있습니다.
+
+Topics
+
+
+Test Cases and Test Methods
+
+ <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#XCTest">#XCTest</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/swift/2023/11/14/swift%EB%A1%9C-radio-button-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.html">
+      swift로 radio button 구현하기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 14, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/swift/2023/11/14/swift%EB%A1%9C-radio-button-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/swift/2023/11/14/swift%EB%A1%9C-radio-button-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.html">
+      <p>1. 구상
+
+
+radio button ui를 살펴보면 보통 아래와 같다.
+
+
+
+이를 통해 필요한 것이 무엇인지 생각해보면 아래와 같다.
+
+
+  cell을 표현할 ui
+  cell에 각 케이스를 나타낼 title
+  cell이 선택되었을 때와 선택되지 않았을 때를 나타낼 ui
+
+
+2. protocol 설계
+
+
+Cell
+
+
+title label 만 필수로 구현하도록 설정하였으며, 이외 버튼과 같은 다른 component가 필요할 경우 구현체에서 자유롭게 추가해주면 된다.
+
+public protocol RadioButtonCell where Self: UIView {
+    var titleLabel: UILabel {... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Swift">#Swift</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/book/2023/11/06/Ch-6.-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81.html">
+      Ch 6. 기본적인 리팩토링<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 06, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/book/2023/11/06/Ch-6.-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/book/2023/11/06/Ch-6.-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81.html">
+      <p>1. 함수 추출하기
+
+
+함수 추출하기란, 코드 조각을 찾아 무슨 일을 하는지 파악한 다음, 독립된 함수로 추출 및 목적에 맞게 이름을 붙이는 것이다. 코드를 언제 독립된 함수로 묶어야 하는 지에 의문을 가질 수 있다. 길이를 기준으로 삼을 수 있으며, 재사용성을 기준으로 삼을 수도 있다. 필자가 생각하는 가장 효율적인 방법은 목적과 구현을 분리이다. 코드를 보고 무슨 일을 하는지 파악하는데 오랜 시간이 걸린다면, 그 부분을 함수로 추출한 뒤 목적에 걸맞는 이름을 지어주면 된다. 이때 목적에 걸맞는 이름이란, 어떻게 함수가 일을 수행하는지가 아닌, 무엇을 하는지가 드러나도록 이름을 지어주어야 한다. 이 원칙을 적용하... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Book">#Book</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Book_Refactoring">#Book_Refactoring</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/book/2023/11/01/Refactoring.html">
+      Refactoring<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Nov 01, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/book/2023/11/01/Refactoring.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/book/2023/11/01/Refactoring.html">
+      <p>Chapter
+
+6. 기본적인 리팩토링 
+ <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Book">#Book</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Book_Refactoring">#Book_Refactoring</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html">
+      셔틀 버스<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 31, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html">
+      <p>문제
+
+Approach
+
+
+콘의 도착 시간이 대기열 배열의 값들에 대해서 조건을 충족하는지를 확인해야 하기 때문에 여러 번의 대기열 배열의 반복이 필요함을 알 수 있다. 제일 늦은 시각을 구하는 것이 목표이며 데이터 크기를 고려하였을 때 이분 탐색 알고리즘을 우선 생각하였다. 시간 복잡도가 최악인 경우 log (23*60 + 59) * 2000 이므로 시간 초과는 발생하지 않는다.
+
+Logic
+
+
+
+  계산 및 비교에서 편리함을 위해 String 타입의 시간 데이터를 모두 분을 단위로 하는 Int형 타입으로 변환해준다.
+  이분 탐색의 포인터가 되는 left와 right는 각각 크루의 도착시간 경계값으로 지정한다.... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/30/Processing-URL-session-data-task-results-with-Combine.html">
+      Processing URL session data task results with Combine<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 30, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/combine/2023/10/30/Processing-URL-session-data-task-results-with-Combine.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/combine/2023/10/30/Processing-URL-session-data-task-results-with-Combine.html">
+      <p>Apple Documentation
+
+Overview
+
+
+URLSession을 통한 작업 수행은 비동기로 동작한다. 네트워크 엔드 포인트, 파일 시스템 및 URL 기반 소스에서 데이터를 가져오려면 시간이 걸린다. URL 로딩 시스템은 delegate 또는 completion handler에게 비동기로 결과를 전달한다. Combine 프레임워크도 비동기로 처리하며, 이를 사용하여 URL 작업을 처리하면 코드가 단순화되며 강화된다.
+
+Create a data task publisher
+
+
+URLSession은 Combine publisher인 URLSession.DataTaskPubisher를 제공한다. 이는 URL이... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Combine">#Combine</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Document">#Document</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/10/30/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC-%EA%B1%B4%EB%84%88%EA%B8%B0.html">
+      징검다리 건너기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 30, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/10/30/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC-%EA%B1%B4%EB%84%88%EA%B8%B0.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/10/30/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC-%EA%B1%B4%EB%84%88%EA%B8%B0.html">
+      <p>문제
+
+Approach
+
+
+
+  stones 배열의 각 원소의 값은 1 ~ 200,000,000
+  stones 배열의 크기는 1 ~ 200,000
+
+
+징검다리를 건널 수 있는 최대 인원을 구하는 것이 목표이며 stones 배열의 크기가 작지 않다는 점을 감안했을 때 이분 탐색 알고리즘을 먼저 떠올렸다. 건널 수 있는 최대 인원에 대하여 반복문을 돌리며, 내부에서 mid 값을 기준으로 stones를 건널 수 있는지를 확인하는 알고리즘을 구상했다. 사간 복잡도를 계산하면 (log 200000000) * 200000로, 연산 횟수가 1억이 넘지 않기 때문에 시간 초과 문제가 발생하지 않음을 확인하였다.
+
+Logic
+
+... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/10/27/%ED%91%9C-%ED%8E%B8%EC%A7%91.html">
+      표 편집<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 27, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/10/27/%ED%91%9C-%ED%8E%B8%EC%A7%91.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/10/27/%ED%91%9C-%ED%8E%B8%EC%A7%91.html">
+      <p>문제
+
+Approach
+
+
+문제에 대한 설명만 제대로 읽으면 꽤 쉽게 풀 수 있는 문제이다.
+
+
+  cmd에 등장하는 모든 X들의 값을 합친 결과가 1,000,000 이하인 경우만 입력으로 주어집니다.
+
+
+이 설명을 통해 다음 노드를 찾기까지 반복문을 수행해도 된다는 것을 인지할 수 있어야 하는게 문제의 포인트라고 생각했다.
+
+반복문을 수행해도 되기 때문에 결국 각 노드는 (이전 노드ID, 다음노드ID)의 데이터를 저장하면 된다.
+
+
+  노드 정보를 담는 자료구조는 연결리스트
+  각 노드는 (이전 노드, 다음 노드) 데이터를 저장
+  k만큼 이전노드로 이동 또는 다음 노드로 이동하도록 알고리즘 작성
+
+
+Logic
+... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/swift/2023/10/25/tuple%EC%9D%80-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C.html">
+      tuple은 언제 사용해야 할까?<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 25, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/swift/2023/10/25/tuple%EC%9D%80-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/swift/2023/10/25/tuple%EC%9D%80-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C.html">
+      <p>network layer를 구현하던 중, network service의 API 요청 메서드의 반환 타입으로 service code와 dto를 반환하는데 이를 담을 데이터 타입으로 tuple을 가장 먼저 생각했다. 하지만 struct 타입도 적절하다는 생각을 했다. 2 가지 중 어느 타입이 더 적합한지 고민하고 공부해보면 좋을 것 같아 글을 작성해본다.
+
+Tuple and Struct
+
+
+tuple과 struct 모두 데이터를 담는 용도로 사용하며, 네이밍을 통해 데이터에 접근할 수 있다. tuple은 타입 이름과 내부 구조를 설계할 필요 없이 즉각적으로 사용할 수 있기 때문에 더욱 쉽고 간편하다. 어찌 보면 str... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags"><a class="post-tag" href="/jekyll-theme-yat/tags.html#Swift">#Swift</a></div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/23/use-Combine-with-UITextField.html">
+      use Combine with UITextField<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 23, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/combine/2023/10/23/use-Combine-with-UITextField.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/combine/2023/10/23/use-Combine-with-UITextField.html">
+      <p>Overview
+
+UITextField를 Combine으로 사용하기 위해서는 NotificationCenter을 활용해야 한다. extension을 활용하면 UITextField에 대한 이벤트를 조금 더 편리하게 받을 수 있다.
+
+1. default
+
+
+가장 기본적인 방식이다. NotificationCenter 인스턴스에 직접 접근하며 어떤 이벤트를 처리받을 것인지 지정해주면 된다. NotificationCenter에서 데이터를 얻기 위해서는 타입 캐스팅 작업을 거쳐야 한다.
+
+NotificationCenter.default
+    .publisher(for: UITextField.textDidChangeNotif... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Combine">#Combine</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/10/23/%EB%B6%80%EB%8C%80-%EB%B3%B5%EA%B7%80.html">
+      부대 복귀<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 23, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/algorithm/2023/10/23/%EB%B6%80%EB%8C%80-%EB%B3%B5%EA%B7%80.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/algorithm/2023/10/23/%EB%B6%80%EB%8C%80-%EB%B3%B5%EA%B7%80.html">
+      <p>문제
+
+Approach
+
+
+  부대ID가 정수 타입이므로 Dictionary 대신 Array를 활용 (만약 String 등 다른 타입이었다면 Dictionary 활용이 더 적합)
+  양방향 데이터 저장으로 반복문 횟수가 많아질 수 있는데, destination에 대해 최단 거리를 구하는 것이 목표이기 때문에 방문 여부를 활용한 bfs + destination을 시작점으로 설정하여 시간 초과 방지 가능. (1..n에서 destination이 아닌, destination에서 시작하여 도달할 수 있는 부대 점검하는 로직 사용)
+
+
+Logic
+
+
+  map 배열을 활용하여 각 부대별로 갈 수 있는 다른 부대ID를 저장.
+... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html">
+      Receiving and Handling Events with Combine<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 22, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html">
+      <p>Apple Documentation
+
+Overview
+
+Combine 프레임워크는 앱이 이벤트를 처리하는 방법에 대한 선언적 접근 방식을 제공한다. 여러 delegate 패턴 또는 completion handler를 구현하는 대신, 주어진 이벤트에 대한 단일 처리 체인을 생성할 수 있다. 체인의 각 부분은 이전 단계에서 수신한 value에 대해 개별적 동작을 수행하는 Combine 연산자이다.
+
+Connect a Publisher to a Subscriber
+
+Combine으로 부터 text field의 notification을 받기 위해서는 NotificationCenter의 default 인스턴스와 publis... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Combine">#Combine</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Document">#Document</a>
+</div>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="post-item ">
+  <h2 class="post-title">
+    <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/22/Combine.html">
+      Combine<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+  </h2>
+  <div class="post-meta">
+    <span class="post-date"><i class="fa fa-calendar"></i> Oct 22, 2023</span><span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+  <div class="post-excerpt">
+<a class="post-image" href="/jekyll-theme-yat/combine/2023/10/22/Combine.html" style="flex: 0 1 38.2%">
+      <div style="background-image: url(/jekyll-theme-yat/assets/images/default-image.jpeg); height: 160px"></div>
+    </a><a class="post-text" href="/jekyll-theme-yat/combine/2023/10/22/Combine.html">
+      <p>Apple Documentation
+
+Overview
+
+Combine은 시간이 경과함에 따라 값이 변화하는 value를 제공하기 위한 Swift API이며, value에 대해 비동기 이벤트로 처리할 수 있도록 도와주는 프레임워크이다.Combine에서 publisher는 항상 변화하는 값을 노출시키기 위해 선언하며, subscriber는 publisher로 부터 노출되는 값을 받기 위해 선언한다.
+
+
+  Publisher 프로토콜은 시간이 경과함에 따라 value를 순차적으로 전달할 수 있는 타입에 선언한다.
+  Publisher는 명시적으로 subscriber가 하는 일이 지정된 경우에만 value를 방출할 수 있... <span class="read_more">Read More</span></p>
+    </a>
+  </div>
+  <div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Combine">#Combine</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Document">#Document</a>
+</div>
+</li>
+</ul>
+
+  <!-- Pagination links -->
+</div>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="common-list">
+  <ul>
+    <li>
+      <a href="/jekyll-theme-yat/index.html">
+        All<span>18</span>
+      </a>
+    </li>
+
+    
+      <li>
+        <a href="/jekyll-theme-yat/categories.html#h-Algorithm">
+          Algorithm <span>7</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/jekyll-theme-yat/categories.html#h-Book">
+          Book <span>2</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/jekyll-theme-yat/categories.html#h-Combine">
+          Combine <span>4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/jekyll-theme-yat/categories.html#h-Swift">
+          Swift <span>2</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/jekyll-theme-yat/categories.html#h-XCTest">
+          XCTest <span>3</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 dev-muuu</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

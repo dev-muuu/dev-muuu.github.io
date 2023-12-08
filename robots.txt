@@ -1,0 +1,1 @@
+Sitemap: http://dev-muuu.github.io/jekyll-theme-yat/sitemap.xml

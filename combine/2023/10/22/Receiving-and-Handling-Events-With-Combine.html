@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Receiving and Handling Events with Combine | 쑤야의 개발 블로그</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Receiving and Handling Events with Combine">
+<meta name="author" content="dev-muuu">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Apple Documentation">
+<meta property="og:description" content="Apple Documentation">
+<link rel="canonical" href="http://dev-muuu.github.io/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html">
+<meta property="og:url" content="http://dev-muuu.github.io/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html">
+<meta property="og:site_name" content="쑤야의 개발 블로그">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-10-22T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Receiving and Handling Events with Combine">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dev-muuu"},"dateModified":"2023-10-22T00:00:00+00:00","datePublished":"2023-10-22T00:00:00+00:00","description":"Apple Documentation","headline":"Receiving and Handling Events with Combine","mainEntityOfPage":{"@type":"WebPage","@id":"http://dev-muuu.github.io/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html"},"url":"http://dev-muuu.github.io/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://dev-muuu.github.io">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://dev-muuu.github.io/jekyll-theme-yat/feed.xml" title="쑤야의 개발 블로그">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="쑤야의 개발 블로그" src="" onerror="this.style.display='none'">
+  쑤야의 개발 블로그
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      // documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Receiving and Handling Events with Combine</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2023-10-22T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 22, 2023
+    </time>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#iOS">#iOS</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Combine">#Combine</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Document">#Document</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="apple-documentation"><a href="https://developer.apple.com/documentation/combine/receiving-and-handling-events-with-combine">Apple Documentation</a></h2>
+
+<h2 id="overview">Overview</h2>
+<hr>
+<p>Combine 프레임워크는 앱이 이벤트를 처리하는 방법에 대한 선언적 접근 방식을 제공한다. 여러 delegate 패턴 또는 completion handler를 구현하는 대신, 주어진 이벤트에 대한 단일 처리 체인을 생성할 수 있다. 체인의 각 부분은 이전 단계에서 수신한 value에 대해 개별적 동작을 수행하는 Combine 연산자이다.</p>
+
+<h2 id="connect-a-publisher-to-a-subscriber">Connect a Publisher to a Subscriber</h2>
+<hr>
+<p>Combine으로 부터 text field의 notification을 받기 위해서는 NotificationCenter의 default 인스턴스와 <code class="language-plaintext highlighter-rouge">publisher(for: object:)</code>를 호출해야 한다. subscriber는 assoicated type인 Input, Output, Failure를 정의해야 한다. Failure는 publisher가 생산하고 subscriber가 받게 되는 에러의 종류를 나타낸다. Combine은 publisher에 output과 failure 타입들을 자동으로 매치시켜주는 2가지의 built-in subscriber를 제공한다.</p>
+
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">sink(receiveCompletion:receiveValue:)</code>는 2가지의 closure를 가진다. 정상적으로 publisher가 종료되거나 error로 인해 실패했을 때 Subscribers.Completion이 방출되며 receiveCompletion가 동작하게 된다.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">assign(to: on:)</code>는 모든 element를 지정된 object의 속성에 즉시 할당한다.</li>
+</ol>
+
+<p>위의 2가지 구독자 모두 publisher에게 무제한의 element를 요청한다. element를 받는 속도를 제어하고 싶다면, Subsctiber protocol를 활용해 자신만의 subscriber를 구현하면 된다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//iOS</span>
+ <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span>
+    <span class="o">.</span><span class="nf">publisher</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">UITextField</span><span class="o">.</span><span class="n">textDidChangeNotification</span><span class="p">,</span> <span class="nv">object</span><span class="p">:</span> <span class="n">textfield</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">sink</span><span class="p">(</span><span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span> <span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">},</span>
+          <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span> <span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="change-the-output-type-with-operators">Change the Output Type with Operators</h2>
+<hr>
+<p>위의 섹션에서는 <code class="language-plaintext highlighter-rouge">sink(receiveValue:)</code>의 receiveValue closure에서 기본적으로 element에 대한 모든 작업을 수행했다. 만약 element에 대해서 많은 커스텀 작업 등을 모두 closure에서 수행하게 될 경우 부담이 될 수 있다. Combine은 <code class="language-plaintext highlighter-rouge">operator</code> 결합을 통해 이벤트를 커스텀하며 전달할 수 있도록 한다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">map(_:)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">flatMap(maxPublishers:_:)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">reduce(_:_:)</code></li>
+</ul>
+
+<p>operator를 통해 publisher 체인이 원하는 결과값으로 변환되면, <code class="language-plaintext highlighter-rouge">sink(receiveCompletion:receiveValue:)</code> subscriber 메서드를 <code class="language-plaintext highlighter-rouge">assign(to: on:)</code> 메서드로 대신 적용할 수 있다. 이 메서드를 통해 view model 인스턴스의 적절한 프로퍼티에 직접 바인딩 시켜줄 수 있다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">sub</span> <span class="o">=</span> <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span>
+    <span class="o">.</span><span class="nf">publisher</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">NSControl</span><span class="o">.</span><span class="n">textDidChangeNotification</span><span class="p">,</span> <span class="nv">object</span><span class="p">:</span> <span class="n">filterField</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">map</span><span class="p">(</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">object</span> <span class="k">as!</span> <span class="kt">NSTextField</span><span class="p">)</span><span class="o">.</span><span class="n">stringValue</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="o">.</span><span class="nf">assign</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="p">\</span><span class="kt">MyViewModel</span><span class="o">.</span><span class="n">filterString</span><span class="p">,</span> <span class="nv">on</span><span class="p">:</span> <span class="n">myViewModel</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="customize-publishers-with-operators">Customize Publishers with Operators</h2>
+<hr>
+<p>수동으로 operator를 추가하는 방식을 활용해 publisher 인스턴스를 확장할 수 있다. operator를 사용해 이벤트 처리 체인을 개선할 수 있는 방식으로 3가지 방식이 존재한다.</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">filter(_:)</code>를 활용하여 특정 조건에 부합하는 element만 receive 할 수 있다.</li>
+  <li>대용량 데이터베이스를 쿼리하는 경우와 같이 필터링 작업에 비용이 많이 드는 경우, 사용자가 입력을 중지할 때까지 기다려야 할 수 있다. 이 경우에 <code class="language-plaintext highlighter-rouge">debounce(for:scheduler:options:)</code> operator를 사용하면 이벤트를 전송하기 전에 경과해야 하는 최소 기간을 설정할 수 있다. RunLoop 클래스는 시간 지연을 초/밀리초 단위로 지정할 수 있는 편리함을 제공한다.</li>
+  <li>만약 결과값이 UI를 업데이트한다면, <code class="language-plaintext highlighter-rouge">receive(on:options:)</code> 호출을 통해 main thread에서 진행되도록 설정할 수 있다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">sub</span> <span class="o">=</span> <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span>
+    <span class="o">.</span><span class="nf">publisher</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">NSControl</span><span class="o">.</span><span class="n">textDidChangeNotification</span><span class="p">,</span> <span class="nv">object</span><span class="p">:</span> <span class="n">filterField</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">map</span><span class="p">(</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">object</span> <span class="k">as!</span> <span class="kt">NSTextField</span><span class="p">)</span><span class="o">.</span><span class="n">stringValue</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="o">.</span><span class="nf">filter</span><span class="p">(</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="o">.</span><span class="nf">allSatisfy</span><span class="p">({</span><span class="kt">CharacterSet</span><span class="o">.</span><span class="n">alphanumerics</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="nv">$0</span><span class="p">)})</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="o">.</span><span class="nf">debounce</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">500</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">RunLoop</span><span class="o">.</span><span class="n">main</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">receive</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="kt">RunLoop</span><span class="o">.</span><span class="n">main</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">assign</span><span class="p">(</span><span class="nv">to</span><span class="p">:\</span><span class="kt">MyViewModel</span><span class="o">.</span><span class="n">filterString</span><span class="p">,</span> <span class="nv">on</span><span class="p">:</span> <span class="n">myViewModel</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="cancel-publishing-when-desired">Cancel Publishing when Desired</h2>
+<hr>
+<p>publisher는 정상적으로 완료되거나 실패할 때까지 element를 계속 방출한다.만약 더 이상 subscribe를 하고 싶지 않다면 subscribe를 취소할 수 있다. <code class="language-plaintext highlighter-rouge">sink(receiveComplete: receiveValue:)</code> 및 <code class="language-plaintext highlighter-rouge">assign(to: on:)</code>에서 생성된 subscirber 타입은 모두 <code class="language-plaintext highlighter-rouge">cancel()</code> 메서드를 제공하는 Cancelable 프로토콜을 구현한다. 반대로 커스텀 subscriber를 생성할 때는 subscribe를 취소할 수 있도록 Cancelable 프로토콜을 채택해야 한다.</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/combine/2023/10/22/Combine.html" title="Combine">Combine</a><a class="next" href="/jekyll-theme-yat/algorithm/2023/10/23/%EB%B6%80%EB%8C%80-%EB%B3%B5%EA%B7%80.html" title="부대 복귀">부대 복귀</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/jekyll-theme-yat/book/2023/11/01/Refactoring.html" title="Refactoring">
+            Refactoring<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/algorithm/2023/12/07/Algorithm-with-Python.html" title="Algorithm with Python">
+            Algorithm with Python<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/xctest/2023/11/22/XCTest.html" title="XCTest">
+            XCTest<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html" title="Receiving and Handling Events with Combine">
+            Receiving and Handling Events with Combine<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 dev-muuu</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

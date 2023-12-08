@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>셔틀 버스 | 쑤야의 개발 블로그</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="셔틀 버스">
+<meta name="author" content="dev-muuu">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="문제">
+<meta property="og:description" content="문제">
+<link rel="canonical" href="http://dev-muuu.github.io/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html">
+<meta property="og:url" content="http://dev-muuu.github.io/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html">
+<meta property="og:site_name" content="쑤야의 개발 블로그">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-10-31T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="셔틀 버스">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dev-muuu"},"dateModified":"2023-10-31T00:00:00+00:00","datePublished":"2023-10-31T00:00:00+00:00","description":"문제","headline":"셔틀 버스","mainEntityOfPage":{"@type":"WebPage","@id":"http://dev-muuu.github.io/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html"},"url":"http://dev-muuu.github.io/jekyll-theme-yat/algorithm/2023/10/31/%EC%85%94%ED%8B%91-%EB%B2%84%EC%8A%A4.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://dev-muuu.github.io">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://dev-muuu.github.io/jekyll-theme-yat/feed.xml" title="쑤야의 개발 블로그">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="쑤야의 개발 블로그" src="" onerror="this.style.display='none'">
+  쑤야의 개발 블로그
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      // documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">셔틀 버스</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2023-10-31T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 31, 2023
+    </time>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Programmers">#Programmers</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="문제"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/17678">문제</a></h2>
+
+<h2 id="approach">Approach</h2>
+<hr>
+
+<p>콘의 도착 시간이 대기열 배열의 값들에 대해서 조건을 충족하는지를 확인해야 하기 때문에 여러 번의 대기열 배열의 반복이 필요함을 알 수 있다. <code class="language-plaintext highlighter-rouge">제일 늦은 시각</code>을 구하는 것이 목표이며 데이터 크기를 고려하였을 때 이분 탐색 알고리즘을 우선 생각하였다. 시간 복잡도가 최악인 경우 <code class="language-plaintext highlighter-rouge">log (23*60 + 59) * 2000</code> 이므로 시간 초과는 발생하지 않는다.</p>
+
+<h2 id="logic">Logic</h2>
+<hr>
+
+<ul>
+  <li>계산 및 비교에서 편리함을 위해 <code class="language-plaintext highlighter-rouge">String</code> 타입의 시간 데이터를 모두 분을 단위로 하는 <code class="language-plaintext highlighter-rouge">Int</code>형 타입으로 변환해준다.</li>
+  <li>이분 탐색의 포인터가 되는 left와 right는 각각 크루의 도착시간 경계값으로 지정한다.</li>
+  <li>대기열에 대해 반복문을 수행하면서, 콘이 탈 수 있는지 없는지만 확인하면 되므로 콘의 시간을 나타내는 mid 보다 현재 대기 중인 크루 시간이 크다면 반복문을 종료한다. 같거나 작다면 셔틀 버스에 태운다.</li>
+  <li>콘이 셔틀 버스에 탈 수 있다면 left 값을 갱신, 탈 수 없다면 right 값을 갱신한다. 이때 탈 수 있는 경우에만 ans 값 또한 최대 값으로 갱신한다.</li>
+</ul>
+
+<h2 id="code">Code</h2>
+<hr>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="n">_</span> <span class="nv">n</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">t</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">m</span><span class="p">:</span><span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">timetable</span><span class="p">:[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">convert</span><span class="p">(</span><span class="n">_</span> <span class="nv">time</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">split</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="nf">split</span><span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="s">":"</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span><span class="o">!</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">makeAns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">time</span> <span class="o">=</span> <span class="p">[</span><span class="n">ans</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="n">ans</span><span class="o">%</span><span class="mi">60</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="nv">$0</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">?</span> <span class="s">"0</span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span> <span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="s">"</span><span class="se">\(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="se">)</span><span class="s">:</span><span class="se">\(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">}</span>
+    
+    <span class="k">let</span> <span class="nv">timetable</span> <span class="o">=</span> <span class="n">timetable</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="nf">convert</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="o">&lt;</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">startBus</span> <span class="o">=</span> <span class="nf">convert</span><span class="p">(</span><span class="s">"09:00"</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">lastBus</span> <span class="o">=</span> <span class="n">startBus</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="k">var</span> <span class="nv">ans</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">var</span> <span class="nv">left</span> <span class="o">=</span> <span class="nf">convert</span><span class="p">(</span><span class="s">"00:00"</span><span class="p">),</span> <span class="k">right</span> <span class="o">=</span> <span class="nf">convert</span><span class="p">(</span><span class="s">"23:59"</span><span class="p">)</span>
+    <span class="k">while</span> <span class="k">left</span> <span class="o">&lt;=</span> <span class="k">right</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">mid</span> <span class="o">=</span> <span class="p">(</span><span class="k">left</span><span class="o">+</span><span class="k">right</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="k">var</span> <span class="nv">bus</span> <span class="o">=</span> <span class="p">(</span><span class="n">startBus</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">//현재 셔틀 시간, 현재 탑승 인원</span>
+        <span class="k">var</span> <span class="nv">tIdx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">tIdx</span> <span class="o">&lt;</span> <span class="n">timetable</span><span class="o">.</span><span class="n">count</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">mid</span> <span class="o">&lt;</span> <span class="n">timetable</span><span class="p">[</span><span class="n">tIdx</span><span class="p">]</span> <span class="o">||</span> <span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">&gt;</span> <span class="n">lastBus</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+            <span class="k">if</span> <span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">&gt;=</span> <span class="n">timetable</span><span class="p">[</span><span class="n">tIdx</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">bus</span><span class="o">.</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="p">{</span>
+                <span class="n">bus</span><span class="o">.</span><span class="mi">1</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">bus</span><span class="o">.</span><span class="mi">1</span> <span class="o">==</span> <span class="n">m</span> <span class="p">{</span>
+                    <span class="n">bus</span> <span class="o">=</span> <span class="p">(</span><span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="p">}</span>
+                <span class="n">tIdx</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">timetable</span><span class="p">[</span><span class="n">tIdx</span><span class="p">]</span> <span class="p">{</span>
+                <span class="n">bus</span> <span class="o">=</span> <span class="p">(</span><span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">mid</span> <span class="o">&lt;=</span> <span class="n">lastBus</span> <span class="o">&amp;&amp;</span> <span class="n">bus</span><span class="o">.</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">lastBus</span> <span class="o">&amp;&amp;</span> <span class="n">bus</span><span class="o">.</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="p">{</span> <span class="c1">//콘이 탈 수 있는지 확인</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">ans</span><span class="p">)</span>
+            <span class="k">left</span> <span class="o">=</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">right</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nf">makeAns</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/combine/2023/10/30/Processing-URL-session-data-task-results-with-Combine.html" title="Processing URL session data task results with Combine">Processing URL session data task results...</a><a class="next" href="/jekyll-theme-yat/book/2023/11/01/Refactoring.html" title="Refactoring">Refactoring</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/jekyll-theme-yat/combine/2023/10/22/Receiving-and-Handling-Events-With-Combine.html" title="Receiving and Handling Events with Combine">
+            Receiving and Handling Events with Combine<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/xctest/2023/11/25/Set-Up-and-Tear-Down-State-in-Your-Tests.html" title="Set Up and Tear Down State in Your Tests">
+            Set Up and Tear Down State in Your Tests<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/swift/2023/10/25/tuple%EC%9D%80-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C.html" title="tuple은 언제 사용해야 할까?">
+            tuple은 언제 사용해야 할까?<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/swift/2023/11/14/swift%EB%A1%9C-radio-button-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.html" title="swift로 radio button 구현하기">
+            swift로 radio button 구현하기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 dev-muuu</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
